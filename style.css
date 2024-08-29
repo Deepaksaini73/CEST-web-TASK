@@ -1,0 +1,237 @@
+:root {
+    --primary-color: #161621;
+    --white-color: #fff;
+    --black-color: #000;
+    --cardBack-color: rgb(255,255,255,0.2);
+    --promptNo-color:rgb(255,255,255,0.05);
+    --border-color:rgb(255,255, 255,0.5);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", system-ui;
+
+}
+body{
+    min-height: 100vh;
+    background:var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.8s;
+}
+body.light{
+    --primary-color:#fdf5df;
+    --white-color:#000;
+    --black-color:#fff;
+    --cardBack-color:rgb(255,255,255,0.5);
+    --promptNo-color:rgb(0,0,0,0.15);
+    --border-color:rgb(0,0, 0,0.7);
+}
+body::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(#f00,#f0f);
+    width: 100%;
+    height: 100%;
+    clip-path: circle(10% at center 60%);
+}
+body::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(#2196f3,#e91e63);
+    width: 100%;
+    height: 100%;
+    clip-path: circle(8% at left 10%);
+}
+
+.contenier{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.contenier .navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 20px;
+}
+
+.contenier .navbar .heading{
+    font-size: 2.6em;
+    color: rgb(255,255, 255,0.8);
+}
+
+.contenier .navbar .change-theme{
+    background: #fff;
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+    height: 40px;
+    padding: 5px;
+    border: 2px solid var(--white-color);
+    box-shadow: 2px 3px 3px rgba(0,0,0,0.5);
+    border-radius: 13px;
+}
+.contenier .navbar .heading{
+    font-size: 2.6em;
+    color: var(--white-color);
+}
+.contenier .pages {
+    display: flex;
+    overflow-x: auto; 
+    width: 1030px;
+    padding: 30px;
+    scrollbar-width: none;
+}
+.contenier .pages .cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    z-index: 1;
+}
+.contenier .pages .cards {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+}
+
+
+.contenier .pages .cards .card{
+    position: relative;
+    width: 280px;
+    height: 400px;
+    margin: 30px;
+    box-shadow: 5px 5px 8px var(--border-color);
+    border-radius: 15px;
+    background: var(--cardBack-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--border-color);
+    border-left: 2px solid var(--border-color);
+    backdrop-filter: blur(6px);
+    transition: 0.5s linear;
+    cursor: pointer;
+    color: var(--white-color);
+}
+.contenier .pages .cards .card:hover{
+    box-shadow: -5px -5px 10px var(--border-color);
+    border-top: none;
+    border-left: none;
+    border-bottom: 2px solid var(--border-color);
+    border-right: 2px solid var(--border-color);
+}
+
+.contenier .pages .cards .card .content h2{
+    opacity: 1;
+    position: absolute;
+    top: -40px;
+    right: 32px;
+    font-size: 8em;
+    color: var(--promptNo-color);
+    pointer-events: none;
+}
+
+.contenier .pages .cards .card .content h4,.contenier .pages .cards .card .content p{
+    padding: 20px;
+    text-align: center;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.contenier .pages .cards .card:hover .content h4,.contenier .pages .cards .card:hover .content p{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.contenier .pages .cards .card .content h4{
+    font-size: 1.8em;
+    color: var(--white-color);
+    font-weight: 300;
+}
+.contenier .pages .cards .card .content p{
+    font-size: 1em;
+    color: var(--white-color);
+    font-weight: 300;
+}
+
+.contenier .pages .cards .card .like-box{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    gap: 50px;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+}
+.contenier .pages .cards .card .like-box p{
+    margin-top: 25px;
+    text-align: center;
+}
+.contenier .pages .cards .card .like-box p i{
+    font-size: 20px;
+}
+.contenier .pages .cards .card .like-box p  span{
+    font-size: 22px;
+    margin: 12px;
+    color: var(--white-color);
+}
+.contenier .pages .cards .card  button{
+    text-decoration: none;
+    background: var(--white-color);
+    border-radius: 12px;
+    padding: 5px 12px;
+    font-size: 1em;
+    color: var(--black-color);
+    margin-top: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    font-weight: 500;
+}
+.contenier .pages .cards .card  button:hover{
+    background: transparent;
+    transition: 0.5s;
+    border: 1px solid var(--border-color);
+    color: var(--white-color);
+}
+
+
+.contenier .navigation{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: var(--white-color);
+    padding: 40px;
+}
+.contenier .navigation .prev-btn-box button , .contenier .navigation .next-btn-box button{
+    border: 0;
+    outline: 0;
+    background: #fff;
+    padding: 12px 25px;
+    border: 2px solid var(--white-color);
+    border-radius: 12px;
+    color: #000;
+    
+}
+.contenier .navigation .prev-btn-box button{
+    opacity: 0.4;
+    
+}
