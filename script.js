@@ -3,8 +3,9 @@ let likeShow=document.querySelectorAll('.like-count');
 let prev=document.getElementById('prev');
 let next=document.getElementById('next');
 let cards=document.querySelectorAll('.cards');
+let x,scrollLength;
 
-likeBtn.forEach(buttn => {
+likeBtn.forEach(buttn => { 
     buttn.addEventListener('click', function() {
         const likeBox = this.closest('.like-box');
         const likeCountSpan = likeBox.querySelector('.like-count');
@@ -27,7 +28,7 @@ function updateButtonState() {
       prev.style.opacity = 1;
   }
 
-  if (currentPageIndex === cards.length) {
+  if (currentPageIndex === scrollLength) {
       next.disabled = true;
       next.style.opacity = 0.5;
   } else {
@@ -42,10 +43,17 @@ let currentPageIndex = 1;
 pagesNo.textContent=`page :- ${currentPageIndex }`;
 
 next.addEventListener("click", () => {
-  if (currentPageIndex < cards.length ) {
+  if (currentPageIndex < scrollLength ) {
     currentPageIndex++;
-    scrollIndex = scrollIndex + 1034;
-    pages.scrollTo(scrollIndex, 0);
+    // // scrollIndex = scrollIndex + 1034;
+    // scrollIndex = scrollIndex + 0;
+    // pages.scrollTo(scrollIndex, 0);
+    checkScreenSize();
+    pages.scrollBy({
+      left: (x), // Change this value according to your card width
+      behavior: 'smooth' // Ensures smooth scrolling
+    });
+    
     updateButtonState();
   }
   pagesNo.textContent=`page :- ${currentPageIndex }`;
@@ -54,9 +62,11 @@ next.addEventListener("click", () => {
 
   prev.addEventListener("click", () => {
     if(currentPageIndex > 1){
-
-    scrollIndex -= 1034;
-    pages.scrollTo(scrollIndex, 0);
+checkScreenSize()
+      pages.scrollBy({
+        left: (-1) * (x), // Change this value according to your card width
+        behavior: 'smooth' // Ensures smooth scrolling
+      });
 
     currentPageIndex--;
     updateButtonState();
@@ -81,5 +91,35 @@ changeTheme.addEventListener('click',()=>{
 
 })
 
-  
+
+// diffrent js on diffrent screen size
+
+function runForLaptop() {
+    // Code to run on laptop screen size
+    x=1034;
+    scrollLength=cards.length;
+}
+
+function runForMobile() {
+  // Code to run on mobile screen size
+  x=340;
+  scrollLength=3 * cards.length;
+}
+
+function checkScreenSize() {
+  if (window.innerWidth > 600) {
+      // Laptop or larger screens
+      runForLaptop();
+  } else {
+      // Mobile screens
+      runForMobile();
+  }
+}
+
+// Run on page load
+checkScreenSize();
+
+// Optional: Re-run when the window is resized
+window.addEventListener('resize', checkScreenSize);
+
   
